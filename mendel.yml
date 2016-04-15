@@ -1,0 +1,8 @@
+service_name: blah
+bundle_type: jar
+project_type: java
+build_target_path: target/
+hosts:
+  dev:
+    hostnames: 127.0.0.1
+    port: '2222'

@@ -1,0 +1,23 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "ubuntu/trusty64"
+
+  config.vm.network "forwarded_port", guest: 8080, host: 8080
+
+  config.vm.provision "shell", inline: <<-SHELL
+    sudo adduser --home /srv/myservice --system --disabled-password --group myservice
+    sudo cp /vagrant/upstart/myservice.conf /etc/init/myservice.conf
+    sudo apt-get update
+    wget --no-check-certificate https://github.com/aglover/ubuntu-equip/raw/master/equip_java8.sh && bash equip_java8.sh
+
+    sudo mkdir /srv/myservice/releases
+    sudo mkdir /srv/myservice/releases/init
+    sudo ln -sfT /srv/myservice/releases/init /srv/myservice/current
+    sudo chown -R myservice:myservice /srv/myservice
+  SHELL
+
+  config.vm.network "private_network", ip: "192.168.53.9"
+
+end

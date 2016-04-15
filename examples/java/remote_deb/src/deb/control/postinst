@@ -1,0 +1,2 @@
+sudo initclt reload-configuration
+sudo service myservice start || sudo service myservice restart

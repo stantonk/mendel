@@ -1,0 +1,16 @@
+service_name: someservice
+bundle_type: jar
+project_type: java
+hosts:
+  prod:
+    hostnames: someservice01,someserice02
+  dev:
+    hostnames: 127.0.0.1
+    port: 2222
+
+# these can be overridden if necessary, but you really shouldn't
+# need to if you're using sprout_java from Chef.
+# service_root: /srv/service_name
+# build_target_path: target/
+# user: service_name
+# group: service_name
